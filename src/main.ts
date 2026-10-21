@@ -1,9 +1,8 @@
-import { createWindow, ScreenAvHeight, ScreenAvWidth } from "./utilsFinestresMarcs"
+import { createWindow, ScreenAvHeight, ScreenAvWidth } from "./utilsFinestresMarcs.js"
 
-start();
 
 /**
- * Obre 2 finestres a ladreta (adalt y abaix)
+ * Obre 2 finestres a la dreta (adalt y abaix)
  */
 function start(): { topWin: Window | null; botWin: Window | null} {
 
@@ -17,5 +16,11 @@ function start(): { topWin: Window | null; botWin: Window | null} {
     return { topWin, botWin }
 }
 
-// width = screenW / 2 y left = screenW - width colocan ambas ventanas en la mitad derecha.
-// height = screenH / 2: la de arriba va en top = 0 y la de abajo en top = height, así se reparten la altura completa sin solaparse
+// ? width = screenW / 2 y left = screenW - width colocan ambas ventanas en la mitad derecha.
+// ? height = screenH / 2: la de arriba va en top = 0 y la de abajo en top = height, así se reparten la altura completa sin solaparse
+
+// TODO enviar missatge, guardar a localstorage y mostrar en el text area
+
+const ta = <HTMLTextAreaElement>document.getElementById("ta");
+const iMsg = <HTMLInputElement>document.getElementById("iMsg");
+const bSend = <HTMLButtonElement>document.getElementById("bSend");

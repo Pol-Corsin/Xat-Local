@@ -1,5 +1,5 @@
-import { createWindow, ScreenAvHeight, ScreenAvWidth } from "./utilsFinestresMarcs";
-start();
+import { createWindow, ScreenAvHeight, ScreenAvWidth } from "./utilsFinestresMarcs.js";
+document.getElementById("bStart")?.addEventListener("click", start);
 function start() {
     const width = Math.floor(ScreenAvWidth() / 2);
     const height = Math.floor(ScreenAvHeight() / 2);
