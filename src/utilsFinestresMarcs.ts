@@ -1,5 +1,4 @@
-
-// ! # INFORMACIO SOBRE LA PANTALLA                                                                      # INFORMACIO SOBRE LA PANTALLA
+// ! # INFORMACIO SOBRE LA PANTALLA
 
 export function ScreenWidth(): number {
     return window.innerWidth;
@@ -14,7 +13,7 @@ export function ScreenAvHeight(): number {
     return window.screen.availHeight;
 }
 
-// ! # INFORMACIO SOBRE EL NAVEGADOR                                                                    # INFORMACIO SOBRE EL NAVEGADOR
+// ! # INFORMACIO SOBRE EL NAVEGADOR
 
 export function UserAgent(): string {
     return navigator.userAgent;
@@ -34,7 +33,9 @@ export function OperatingSystem(): string {
 export function BrowserLang(): string {
     return navigator.language;
 }
-// ! # INFORMACIO SOBRE LA URL ACTUAL                                                                   # INFORMACIO SOBRE LA URL ACTUAL
+
+// ! # INFORMACIO SOBRE LA URL ACTUAL
+
 export function CurrentURL(): string {
     return window.location.href;
 }
@@ -60,7 +61,16 @@ export function Hash(): string {
     return window.location.hash;
 }
 
-// ! # Obrir finestres                                                                                                      # Obrir finestres
+/**
+ * Llegeix un parametre de la url. Si la url es "xat-ind.html?id=X1",
+ * getParam("id") torna "X1". Si no existeix torna null.
+ */
+export function getParam(name: string): string | null {
+    // URLSearchParams ja sap separar "?id=X1&a=2" en parelles clau/valor
+    return new URLSearchParams(QueryString()).get(name);
+}
+
+// ! # Obrir i tancar finestres
 
 /**
  * Crea UNA finestra amb les mesures i la posició indicades.
@@ -106,6 +116,20 @@ export function distributeWindows(count: number, url: string): Window[] {
     return wins;
 }
 
+/**
+ * Diu si una finestra segueix oberta.
+ * Torna false si es null (mai s'ha obert) o si l'usuari l'ha tancada.
+ */
+export function isWindowOpen(win: Window | null): boolean {
+    return win !== null && !win.closed;
+}
+
+/**
+ * Tanca una finestra nomes si existeix i segueix oberta.
+ */
+export function closeWindow(win: Window | null): void {
+    if (win !== null && !win.closed) win.close();
+}
 
 // ! # Crear pestaña
 
@@ -118,8 +142,7 @@ export function createTab(url: string = ""): Window | null {
     return window.open(url, "_blank");
 }
 
-
-// ! # Crear iFrames                                                                                                       # Crear iFrames
+// ! # Crear iFrames
 
 /**
  * Crea un iframe dins d'un element (per defecte, el body).
@@ -139,4 +162,52 @@ export function createIFrame(
     return iframe;
 }
 
+// ! # LOCALSTORAGE
 
+// ? localStorage nomes guarda TEXT (string). Per guardar objectes o arrays
+// ? els hem de convertir a text amb JSON.stringify i, al llegir, tornar-los
+// ? a convertir amb JSON.parse.
+
+/**
+ * Guarda qualsevol valor (objecte, array, numero...) com a JSON.
+ */
+export function saveJSON(key: string, value: unknown): void {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+/**
+ * Llegeix un valor guardat amb saveJSON.
+ * @param key     la clau
+ * @param defecte el que tornem si la clau no existeix o el json esta trencat
+ */
+export function loadJSON<T>(key: string, defecte: T): T {
+    const text = localStorage.getItem(key); // string o null
+    if (text === null) return defecte;
+    try {
+        return JSON.parse(text) as T;
+    } catch {
+        // si algu ha guardat text que no es json valid no volem que peti tot
+        return defecte;
+    }
+}
+
+/**
+ * Esborra una clau del localStorage.
+ */
+export function removeKey(key: string): void {
+    localStorage.removeItem(key);
+}
+
+// ! # DADES DEL XAT (compartides entre l'admin i les finestres d'usuari)
+
+// ? aquest es el format de cada missatge
+export interface Missatge {
+    id: number;   // Date.now(): fa que cada missatge sigui diferent
+    user: string; // qui l'ha escrit ("Admin", "X1", "X2")
+    text: string; // el contingut
+}
+
+// ? claus del localStorage. Les posem aqui perque les facin servir tots dos
+// ? fitxers i no ens equivoquem escrivint-les a ma dues vegades.
+export const KEY_ENTRADA = "xat_entrada";     // l'usuari hi deixa el missatge nou, l'admin el llegeix
+export const KEY_HISTORIAL = "xat_historial"; // l'admin hi guarda tots els missatges, els usuaris el llegeixen
