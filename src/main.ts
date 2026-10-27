@@ -57,16 +57,16 @@ function pinta(historial: Missatge[]): void {
  */
 function afegeixMissatge(m: Missatge): void {
     const historial = loadJSON<Missatge[]>(KEY_HISTORIAL, []);
-    // historial.unshift(m); // unshift = afegir al principi de l'array
+    // * historial.unshift(m); // unshift = afegir al principi de l'array
     historial.push(m)
-    saveJSON(KEY_HISTORIAL, historial); // aixo avisa les finestres dels usuaris
-    pinta(historial); // l'admin no rep l'avis (vegeu mes avall), l'hem de pintar nosaltres
+    saveJSON(KEY_HISTORIAL, historial); // avisa les finestres dels usuaris
+    pinta(historial);
 }
 
 // ! # ACCIONS DELS BOTONS
 
 function start(): void {
-    // comencem de zero: historial buit i cap missatge pendent
+    // comienzo de zero: na en historial ni msgs pendientes
     // ho fem ABANS d'obrir les finestres perque en carregar ja el trobin buit
     saveJSON(KEY_HISTORIAL, []);
     removeKey(KEY_ENTRADA);
@@ -77,8 +77,8 @@ function start(): void {
 }
 
 function enviaAdmin(): void {
-    const text = iMsg.value.trim(); // trim treu els espais del principi i del final
-    if (text === "") return;       // no enviem missatges buits
+    const text = iMsg.value.trim();
+    if (text === "") return;   // en caso de nada
 
     afegeixMissatge({ id: Date.now(), user: NOM_ADMIN, text });
     iMsg.value = "";
@@ -89,7 +89,7 @@ function esborra(): void {
     pinta([]);
 
     // si alguna finestra s'havia tancat, la tornem a obrir
-    // (es fa despres de guardar l'historial buit perque en obrir-se el trobi buit)
+    // (es fa despres de guardar l'historial buit perque al obrirse el trobi buit)
     for (let i = 0; i < finestres.length; i++) {
         if (!isWindowOpen(finestres[i])) obreFinestra(i);
     }
