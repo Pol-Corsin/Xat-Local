@@ -104,7 +104,6 @@ bClose1.addEventListener("click", () => closeWindow(finestres[0]));
 bClose2.addEventListener("click", () => closeWindow(finestres[1]));
 
 // l'event "storage" salta quan UNA ALTRA finestra (mateix origen) canvia el localStorage
-// important: no salta a la finestra que ha fet el canvi
 // aqui rebem els missatges que escriuen les finestres dels usuaris
 window.addEventListener("storage", (e: StorageEvent) => {
     if (e.key !== KEY_ENTRADA) return;   // ens passen tots els canvis, filtrem pel nostre

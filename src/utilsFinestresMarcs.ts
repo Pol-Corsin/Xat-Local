@@ -178,7 +178,7 @@ export function saveJSON(key: string, value: unknown): void {
 /**
  * Llegeix un valor guardat amb saveJSON.
  * @param key     la clau
- * @param defecte el que tornem si la clau no existeix o el json esta trencat
+ * @param defecte el que tornem si la clau no existeix 
  */
 export function loadJSON<T>(key: string, defecte: T): T {
     const text = localStorage.getItem(key); // string o null
@@ -186,7 +186,6 @@ export function loadJSON<T>(key: string, defecte: T): T {
     try {
         return JSON.parse(text) as T;
     } catch {
-        // si algu ha guardat text que no es json valid no volem que peti tot
         return defecte;
     }
 }
@@ -203,9 +202,9 @@ export function removeKey(key: string): void {
 
 /**
  * Baixa l'scroll d'un element fins al final.
- * scrollHeight = alcada total del contingut, scrollTop = fins on hem baixat.
- * Si posem scrollTop = scrollHeight, es veu l'ultima linia.
- * S'ha de cridar DESPRES d'haver canviat el text, sino calcula amb el text vell.
+ * scrollHeight = alcada total del contingut, scrollTop = fins on hem baixat
+ * Si posem scrollTop = scrollHeight, es veu l'ultima linia
+ * S'ha de cridar DESPRES d'haver canviat el text
  */
 export function scrollToBottom(el: HTMLElement): void {
     el.scrollTop = el.scrollHeight;

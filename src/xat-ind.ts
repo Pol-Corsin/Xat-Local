@@ -30,8 +30,7 @@ function envia(): void {
     const m: Missatge = { id: Date.now(), user: meuId, text };
 
     // nomes deixem el missatge a la clau d'entrada, l'admin s'encarrega de la resta
-    // l'id amb Date.now() es important: si guardessim dues vegades exactament
-    // el mateix text, el valor no canvia i l'event storage no saltaria
+    // si guardessim dues vegades exactament el mateix text, el valor no canvia i l'event storage no saltaria
     saveJSON(KEY_ENTRADA, m);
     iMsg.value = "";
 }
