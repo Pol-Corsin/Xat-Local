@@ -2,10 +2,10 @@ import {
     createWindow, closeWindow, isWindowOpen,
     ScreenAvHeight, ScreenAvWidth,
     saveJSON, loadJSON, removeKey,
-    KEY_ENTRADA, KEY_HISTORIAL
-} from "./utilsFinestresMarcs";
+    KEY_ENTRADA, KEY_HISTORIAL,
+    scrollToBottom
+} from "./utilsFinestresMarcs.js";
 
-import type { Missatge } from "./utilsFinestresMarcs";
 
 const NOM_ADMIN = "Admin";
 
@@ -47,6 +47,7 @@ function obreFinestra(i: number): void {
  */
 function pinta(historial: Missatge[]): void {
     ta.value = historial.map(m => `${m.user}: ${m.text}`).join("\n");
+    scrollToBottom(ta); // baixem fins l'ultim missatge, sempre despres de canviar el text
 }
 
 /**
@@ -56,7 +57,8 @@ function pinta(historial: Missatge[]): void {
  */
 function afegeixMissatge(m: Missatge): void {
     const historial = loadJSON<Missatge[]>(KEY_HISTORIAL, []);
-    historial.unshift(m); // unshift = afegir al principi de l'array
+    // historial.unshift(m); // unshift = afegir al principi de l'array
+    historial.push(m)
     saveJSON(KEY_HISTORIAL, historial); // aixo avisa les finestres dels usuaris
     pinta(historial); // l'admin no rep l'avis (vegeu mes avall), l'hem de pintar nosaltres
 }

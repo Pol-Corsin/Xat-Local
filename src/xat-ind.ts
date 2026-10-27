@@ -1,5 +1,4 @@
-import { getParam, loadJSON, saveJSON, KEY_ENTRADA, KEY_HISTORIAL } from "./utilsFinestresMarcs";
-import type { Missatge } from "./utilsFinestresMarcs";
+import { getParam, loadJSON, saveJSON, KEY_ENTRADA, KEY_HISTORIAL, scrollToBottom } from "./utilsFinestresMarcs.js";
 
 // ! # QUI SOC
 
@@ -21,6 +20,7 @@ document.title = meuId;
 
 function pinta(historial: Missatge[]): void {
     ta.value = historial.map(m => `${m.user}: ${m.text}`).join("\n");
+    scrollToBottom(ta); // baixem fins l'ultim missatge, sempre despres de canviar el text
 }
 
 function envia(): void {
