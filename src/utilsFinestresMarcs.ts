@@ -198,14 +198,20 @@ export function removeKey(key: string): void {
     localStorage.removeItem(key);
 }
 
-// ! # DADES DEL XAT (compartides entre l'admin i les finestres d'usuari)
 
-// ? aquest es el format de cada missatge
-export interface Missatge {
-    id: number;   // Date.now(): fa que cada missatge sigui diferent
-    user: string; // qui l'ha escrit ("Admin", "X1", "X2")
-    text: string; // el contingut
+// ! # SCROLL
+
+/**
+ * Baixa l'scroll d'un element fins al final.
+ * scrollHeight = alcada total del contingut, scrollTop = fins on hem baixat.
+ * Si posem scrollTop = scrollHeight, es veu l'ultima linia.
+ * S'ha de cridar DESPRES d'haver canviat el text, sino calcula amb el text vell.
+ */
+export function scrollToBottom(el: HTMLElement): void {
+    el.scrollTop = el.scrollHeight;
 }
+
+// ! # DADES DEL XAT (compartides entre l'admin i les finestres d'usuari)
 
 // ? claus del localStorage. Les posem aqui perque les facin servir tots dos
 // ? fitxers i no ens equivoquem escrivint-les a ma dues vegades.
