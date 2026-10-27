@@ -1,8 +1,17 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xat</title>
+    <script type="module" src="xat-ind.js"></script>
+</head>
 <body>
-    <h1>Xat Local</h1>
+    <h1>Xat Local - <span id="usuari"></span></h1>
     <div class="container" id="xat">
-
-        <textarea name="ta" id="ta"></textarea>
+        <textarea name="ta" id="ta" readonly></textarea> <br> <br>
+        <input type="text" id="iMsg">
         <button id="bSend">Enviar</button>
     </div>
 </body>
+</html>
