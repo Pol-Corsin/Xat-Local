@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inici</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- type="module" fa que el script s'executi quan el html ja esta carregat -->
     <script type="module" src="main.js"></script>
 </head>
 <body>
     <h1>Pràctica Xat local</h1>
     <p>Pol Corsín Iglesias - DAW2</p>
     <button id="bStart">START</button> <br> <br>
+
     <div class="container" id="xat">
-
-
-        <textarea name="ta" id="ta"></textarea> <br> <br>
+        <textarea name="ta" id="ta" readonly></textarea> <br> <br>
         <input type="text" id="iMsg">
-        <button id="bSend">Enviar</button> <br> <br>
+        <button id="bSend">Enviar</button>
+        <button id="bClear">Esborrar xat</button> <br> <br>
 
         <div id="closeW">
-            <button id="closeW1">Tencar Finestra 1</button>
-            <button id="closeW2">Tencar Finestra 2</button>
+            <button id="closeW1">Tancar Finestra 1</button>
+            <button id="closeW2">Tancar Finestra 2</button>
         </div>
     </div>
 </body>
