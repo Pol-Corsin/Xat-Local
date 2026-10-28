@@ -107,7 +107,7 @@ bClose2.addEventListener("click", () => closeWindow(finestres[1]));
 // aqui rebem els missatges que escriuen les finestres dels usuaris
 window.addEventListener("storage", (e: StorageEvent) => {
     if (e.key !== KEY_ENTRADA) return;   // ens passen tots els canvis, filtrem pel nostre
-    if (e.newValue === null) return;     // null vol dir que s'ha esborrat la clau, no hi ha missatge
+    if (e.newValue === null) return;     // no clau trobat
 
     const m = JSON.parse(e.newValue) as Missatge; // del text json tornem a tenir un objecte
     afegeixMissatge(m);
