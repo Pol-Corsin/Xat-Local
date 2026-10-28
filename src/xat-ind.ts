@@ -2,8 +2,7 @@ import { getParam, loadJSON, saveJSON, KEY_ENTRADA, KEY_HISTORIAL, scrollToBotto
 
 // ! # QUI SOC
 
-// l'admin ens obre amb "xat-ind.html?id=X1", aixi que el nom surt de la url
-// ?? es "si es null, fes servir aixo altre"
+//  el nom surt de la url
 const meuId = getParam("id") ?? "Desconegut";
 
 // ! # ELEMENTS DEL HTML
